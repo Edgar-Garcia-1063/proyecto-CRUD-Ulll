@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+        <h1>Sucursales</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarSucursal/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" placeholder="ID Sucursal" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" placeholder="Dirección" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="txttelefono" name="txttelefono" placeholder="Teléfono" class="form-control" minlength="10" maxlength="15" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtciudad" name="txtciudad" placeholder="Ciudad" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtestado" name="txtestado" placeholder="Estado" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcodigopostal" name="txtcodigopostal" placeholder="Código Postal" class="form-control" minlength="5" maxlength="10" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthorario" name="txthorario" placeholder="Horario" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Sucursal</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+        <h1>Listado de Sucursales</h1>
+        <img class="w-50" src="{% static 'img/sucursal.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table">
+                    <th scope="col">ID Sucursal</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Código Postal</th>
+                    <th scope="col">Horario</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sucursal in sucursal %}
+                <tr class="table">
+                    <td>{{ sucursal.id_sucursal }}</td>
+                    <td>{{ sucursal.nombre }}</td>
+                    <td>{{ sucursal.direccion }}</td>
+                    <td>{{ sucursal.telefono }}</td>
+                    <td>{{ sucursal.ciudad }}</td>
+                    <td>{{ sucursal.estado }}</td>
+                    <td>{{ sucursal.codigo_postal }}</td>
+                    <td>{{ sucursal.horario }}</td>
+                    <td><a href="seleccionarSucursal/{{ sucursal.id_sucursal }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarSucursal/{{ sucursal.id_sucursal }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+</div>
+    
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Sucursal</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarSucursal/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" value="{{ sucursal.id_sucursal }}" class="form-control" minlength="1" maxlength="6" readonly required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ sucursal.nombre }}" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" value="{{ sucursal.direccion }}" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="txttelefono" name="txttelefono" value="{{ sucursal.telefono }}" class="form-control" minlength="10" maxlength="15" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtciudad" name="txtciudad" value="{{ sucursal.ciudad }}" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtestado" name="txtestado" value="{{ sucursal.estado }}" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcodigopostal" name="txtcodigopostal" value="{{ sucursal.codigo_postal }}" class="form-control" minlength="5" maxlength="10" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthorario" name="txthorario" value="{{ sucursal.horario }}" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Sucursal</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+        <h1>Productos</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarProducto/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" placeholder="ID Producto" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmarca" name="txtmarca" placeholder="Marca" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmodelo" name="txtmodelo" placeholder="Modelo" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttalla" name="txttalla" placeholder="Talla" class="form-control" minlength="1" maxlength="10" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtidprov" name="txtidprov" placeholder="ID Proveedor" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" step="0.01" id="txtprecio" name="txtprecio" placeholder="Precio" class="form-control" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Producto</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+        <h1>Listado de Productos</h1>
+        <img class="w-50" src="{% static 'img/producto.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table">
+                    <th scope="col">ID Producto</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Talla</th>
+                    <th scope="col">ID Proveedor</th>
+                    <th scope="col">Precio</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in producto %}
+                <tr class="table">
+                    <td>{{ producto.id_producto }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.marca }}</td>
+                    <td>{{ producto.modelo }}</td>
+                    <td>{{ producto.talla }}</td>
+                    <td>{{ producto.id_proveedor }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td><a href="seleccionarProducto/{{ producto.id_producto }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarProducto/{{ producto.id_producto }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
