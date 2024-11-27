@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+        <h1>Órdenes</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarOrden/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" placeholder="ID Orden" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtidcliente" name="txtidcliente" placeholder="ID Cliente" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="txtfecha" name="txtfecha" placeholder="Fecha" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" step="0.01" id="txttotal" name="txttotal" placeholder="Total" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmetodo" name="txtmetodo" placeholder="Método de Pago" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Orden</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+        <h1>Listado de Órdenes</h1>
+        <img class="w-50" src="{% static 'img/venta.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table">
+                    <th scope="col">ID Orden</th>
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Método de Pago</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for orden in orden %}
+                <tr class="table">
+                    <td>{{ orden.id_orden }}</td>
+                    <td>{{ orden.id_cliente }}</td>
+                    <td>{{ orden.fecha | date:'d-m-y'}}</td>
+                    <td>{{ orden.total }}</td>
+                    <td>{{ orden.metodo_pago }}</td>
+                    <td><a href="seleccionarOrden/{{ orden.id_orden }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarOrden/{{ orden.id_orden }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

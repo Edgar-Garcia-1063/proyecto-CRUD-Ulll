@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+<div class="row"> <!-- Filas -->
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4"> <!-- Columna izquierda-->
+        <h1> Empleados </h1>
+        <div class="card"><!-- Tarjeta -->
+            <div class="card-body">
+                <form action="registrarEmpleado/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" placeholder="ID Empleado" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellido" name="txtapellido" placeholder="Apellido" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtpuesto" name="txtpuesto" placeholder="Puesto" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttelefono" name="txttelefono" placeholder="Teléfono" class="form-control" minlength="1" maxlength="15" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" placeholder="Email" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthorario" name="txthorario" placeholder="Horario" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtidsucursal" name="txtidsucursal" placeholder="ID Sucursal" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark"> Guardar Empleado </button><br>
+                    </div>
+                </form>
+            </div>
+        </div><!-- Tarjeta -->
+    </div><!-- Columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8"> <!-- Columna derecha -->
+        <h1> Listado de Empleados </h1>
+        <img class="w-50" src="{% static 'img/empleado.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table">
+                    <th scope="col">ID Empleado</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Puesto</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Horario</th>
+                    <th scope="col">ID Sucursal</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in empleado %}
+                <tr class="table">
+                    <td>{{ m.id_empleado }}</td>
+                    <td>{{ m.nombre }}</td>
+                    <td>{{ m.apellido }}</td>
+                    <td>{{ m.puesto }}</td>
+                    <td>{{ m.telefono }}</td>
+                    <td>{{ m.email }}</td>
+                    <td>{{ m.horario }}</td>
+                    <td>{{ m.id_sucursal }}</td>
+                    <td><a href="seleccionarEmpleado/{{ m.id_empleado }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarEmpleado/{{ m.id_empleado }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- Columna derecha -->
+</div>
+{% endblock %}

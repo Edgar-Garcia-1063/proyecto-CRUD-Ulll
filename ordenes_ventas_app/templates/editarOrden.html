@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Orden</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarOrden/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" value="{{ orden.id_orden }}" class="form-control" minlength="1" maxlength="6" readonly required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtidcliente" name="txtidcliente" value="{{ orden.id_cliente }}" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="txtfecha" name="txtfecha" value="{{ orden.fecha }}" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" step="0.01" id="txttotal" name="txttotal" value="{{ orden.total }}" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmetodo" name="txtmetodo" value="{{ orden.metodo_pago }}" class="form-control" minlength="1" maxlength="50" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Orden</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
