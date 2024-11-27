@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+        <h1>Clientes</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarCliente/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" placeholder="ID Cliente" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellido" name="txtapellido" placeholder="Apellido" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" placeholder="Dirección" class="form-control" minlength="1" maxlength="200" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttelefono" name="txttelefono" placeholder="Teléfono" class="form-control" minlength="1" maxlength="15" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+        <h1>Listado de Clientes</h1>
+        <img class="w-50" src="{% static 'img/cliente.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table">
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Teléfono</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in cliente %}
+                <tr class="table">
+                    <td>{{ cliente.id_cliente }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.direccion }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                    <td><a href="seleccionarCliente/{{ cliente.id_cliente }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarCliente/{{ cliente.id_cliente }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

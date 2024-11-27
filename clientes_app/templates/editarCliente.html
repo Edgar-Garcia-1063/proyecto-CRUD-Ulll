@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Cliente</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarCliente/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" value="{{ cliente.id_cliente }}" class="form-control" minlength="1" maxlength="6" readonly required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ cliente.nombre }}" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellido" name="txtapellido" value="{{ cliente.apellido }}" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" value="{{ cliente.direccion }}" class="form-control" minlength="1" maxlength="200" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttelefono" name="txttelefono" value="{{ cliente.telefono }}" class="form-control" minlength="1" maxlength="15" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

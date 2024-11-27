@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+    <div class="row"> <!-- la filas-->
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4"> <!-- Columna izquierda-->
+        <h1> Categorias </h1>
+        <div class="card"><!-- tarjeta-->
+          <div class="card-body">
+            <form action="registrarCategoria/" method="post"> {% csrf_token %}<!-- -->
+              <div class="form-group">
+                <input type="text" id="txtid" name="txtid" placeholder="ID  Categoria" class="form-control" minlenght="1" maxlenght="6" required><br>
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtidprod" name="txtidprod" placeholder="ID Producto" class="form-control" min="1" max="9" required><br>
+              </div>
+              <div class="form-group py-3">
+                <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre Categoria" class="form-control"  minlenght="1" maxlenght="100" required><br>
+              </div>
+              <div class="form-group py-3">
+                <input type="text" id="txtdes" name="txtdes" placeholder="Descripcion Categoria" class="form-control"  minlenght="1" maxlenght="100" required><br>
+              </div>
+              <div class="form-group py-3">
+                <input type="text" id="txtdis" name="txtdis" placeholder="Diponible Categoria" class="form-control"  minlenght="1" maxlenght="100" required><br>
+              </div>
+              <div class="form-group py-3">
+                <button type="submit" class="btn btn-dark"> Guardar Categoria </button><br>
+              </div>
+            </form>
+          </div>
+        </div><!-- tarjeta-->
+    </div><!-- Columna izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8"> <!-- Columna derecha -->
+        <h1> Listado De Categorias </h1>
+        <!-- La tabla -->
+        <img class="w-50" src="{% static 'img/categoria.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+              <tr class="table">
+                <th scope="col">Id_Categoria </th>
+                <th scope="col">Id_producto </th>
+                <th scope="col">Nombre </th>
+                <th scope="col">Descripcion </th>
+                <th scope="col">Disponible </th>
+                <th> Opciones </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in miscat %}
+              <tr class="table">
+                <td>
+                  {{m.id_categoria}}
+                </td>
+                <td>
+                  {{m.id_prod}}
+                </td>
+                <td>
+                  {{m.nombre}}
+                </td>
+                <td>
+                    {{m.desc}}
+                </td>
+                <td>
+                    {{m.disponible}}
+                </td>
+                <td> <a href="seleccionarCategoria/{{m.id_categoria}}" class="btn btn-info"> Editar </a> </td> <!--Falta-->
+                <td> <a href="borrarCategoria/{{m.id_categoria}}" class="btn btn-danger"> Borrar </a> </td> <!--Falta-->
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        <!-- La tabla -->
+    </div><!-- Columna derecha -->
+    </div>
+{% endblock %}
