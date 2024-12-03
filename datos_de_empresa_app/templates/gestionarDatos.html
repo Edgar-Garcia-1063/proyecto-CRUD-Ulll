@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+        <h1> Datos </h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarDatos/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtidE" name="txtidE" placeholder="ID Empresa" class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtidS" name="txtidS" placeholder="Nombre" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="Apellido" class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtubicacion" name="txtubicacion" placeholder="Dirección" class="form-control" minlength="1" maxlength="200" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark">Guardar Datos</button><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+        <h1>Listado de Datos</h1>
+        <img class="w-50" src="{% static 'img/datos.jpg' %}" alt="">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table">
+                    <th scope="col">ID Empresa</th>
+                    <th scope="col">ID Sucursal</th>
+                    <th scope="col">Nombre Empresa</th>
+                    <th scope="col">Ubicacion</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in dat %}
+                <tr class="table">
+                    <td>{{ d.id_empresa }}</td>
+                    <td>{{ d.id_sucursal }}</td>
+                    <td>{{ d.nombre_empresa }}</td>
+                    <td>{{ d.ubicacion_empresa }}</td>
+                    <td><a href="seleccionarDatos/{{ d.id_empresa }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarDatos/{{ d.id_empresa }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
